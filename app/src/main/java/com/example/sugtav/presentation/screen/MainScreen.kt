@@ -1,7 +1,9 @@
-package com.example.sugtav.presentation.ui.screen
+package com.example.sugtav.presentation.screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
@@ -25,10 +27,10 @@ import androidx.compose.ui.unit.dp
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.sugtav.R
+import com.example.sugtav.presentation.components.InfoCard
+import com.example.sugtav.presentation.components.NotFound
+import com.example.sugtav.presentation.components.TavInfo
 import com.example.sugtav.presentation.state.VehicleUiState
-import com.example.sugtav.presentation.ui.components.InfoCard
-import com.example.sugtav.presentation.ui.components.TavInfo
-import com.example.sugtav.presentation.viewModel.VehicleViewModel
 
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -62,7 +64,7 @@ fun MainScreen(
                     isError = carNumber.isNotEmpty() && (carNumber.length < 5 || carNumber.length > 8),
                     supportingText = {
                         if (carNumber.isNotEmpty() && (carNumber.length < 5 || carNumber.length > 8)) {
-                            Text(text = "Car number must be between 5 and 8 digits")
+                            Text(text = stringResource(R.string.car_number_must_length))
                         }
                     }
                 )
@@ -76,7 +78,27 @@ fun MainScreen(
             }
 
             is VehicleUiState.Error -> {
-                Text(text = state.message)
+                if (state.message.contains("No record found")) {
+                    NotFound(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        carNumber = carNumber
+                    )
+                } else{
+                    Text(text = state.message)
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Button(
+                    onClick = {
+                        carNumber = ""
+                        viewModel.restartState()
+                    }
+                ) {
+                    Text(stringResource(R.string.searchDifferentCar))
+                }
             }
 
             is VehicleUiState.Loading -> {
@@ -92,6 +114,18 @@ fun MainScreen(
                         .padding(24.dp),
                     record = state.record
                 )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // New Search Button after results
+                Button(
+                    onClick = {
+                        carNumber = ""
+                        viewModel.restartState()
+                    }
+                ) {
+                    Text(stringResource(R.string.searchDifferentCar))
+                }
             }
         }
 
@@ -109,7 +143,7 @@ fun MainScreen(
 private fun MainScreenPreview() {
 
     MainScreen(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
     )
 
 }

@@ -1,5 +1,6 @@
-package com.example.sugtav.presentation.ui.components
+package com.example.sugtav.presentation.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,7 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.sugtav.R
-import com.example.sugtav.domain.model.VehicleRecord
+import com.example.sugtav.presentation.theme.SugtavTheme
 
 @Composable
 fun InfoCard(modifier: Modifier = Modifier) {
@@ -31,11 +32,20 @@ fun InfoCard(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            Row {
-                Icon(modifier = Modifier.size(40.dp).padding(top = 8.dp), imageVector = Icons.Default.Info, contentDescription = null)
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(top = 8.dp, start = 8.dp),
+                    imageVector = Icons.Default.Info,
+                    contentDescription = null
+                )
                 Text(
-                    modifier = Modifier.fillMaxWidth()
-                        .padding(8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp, end = 46.dp),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.titleLarge,
                     text = "שים לב !!!",
@@ -44,9 +54,11 @@ fun InfoCard(modifier: Modifier = Modifier) {
 
 
             Text(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .padding(8.dp),
                 textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.labelMedium,
                 text = stringResource(R.string.info_card),
             )
 
@@ -60,8 +72,10 @@ fun InfoCard(modifier: Modifier = Modifier) {
 @Composable
 private fun InfoCardPreview() {
 
-    InfoCard(
-        modifier = Modifier
-    )
+    SugtavTheme {
+        InfoCard(
+            modifier = Modifier
+        )
+    }
 
 }
