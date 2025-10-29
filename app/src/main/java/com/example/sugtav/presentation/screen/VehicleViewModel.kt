@@ -1,4 +1,4 @@
-package com.example.sugtav.presentation.viewModel
+package com.example.sugtav.presentation.screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -39,5 +39,8 @@ class VehicleViewModel (
         }
     }
 
+    fun restartState(){
+        _uiState.value = VehicleUiState.Idle
+    }
 
 }
