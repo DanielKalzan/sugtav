@@ -11,16 +11,16 @@ data class TagTypeInfo(
 fun getTagTypeInfo(tagType: Int): TagTypeInfo {
     return when (tagType) {
         1 -> TagTypeInfo(
-            text = "תג נכה רגיל", // White tag
+            text = "תו נכה רגיל",
             imageRes = R.drawable.standard_tag
         )
         2 -> TagTypeInfo(
-            text = "תג נכה כיסא", // Green tag
+            text = "תו נכה כיסא",
             imageRes = R.drawable.chair_tag
         )
         else -> TagTypeInfo(
             text = "תו לא ידוע", // Unknown tag
-            imageRes = R.drawable.car_icon // Fallback image
+            imageRes = R.drawable.car_icon
         )
     }
 }
