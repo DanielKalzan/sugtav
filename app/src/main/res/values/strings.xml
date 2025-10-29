@@ -1,6 +1,12 @@
 <resources>
-    <string name="app_name">sugtav</string>
+    <string name="app_name">סוג תג</string>
     <string name="info_card">הנתונים מוגשים כפי שהתקבלו מהמקור הציבורי. איננו אחראים לנכונותם, עדכניותם או שלמותם. מומלץ לוודא את המידע מול המקור הרשמי.</string>
     <string name="car_number">מספר רכב</string>
     <string name="check_car">בדוק רכב</string>
+    <string name="searchDifferentCar">חפש רכב נוסף</string>
+    <string name="car_number_must_length">מספר הרכב חייב להיות בין 5 ל-8 ספרות</string>
+    <string name="check_for_tav">בדיקת תו נכה</string>
+    <string name="issue_date">תאריך הנפקה:</string>
+    <string name="tag_type">סוג תו:</string>
+    <string name="not_found_car">לא נמצא תו נכה לרכב זה </string>
 </resources>
