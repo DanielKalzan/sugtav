@@ -6,15 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.ui.Modifier
-import com.example.sugtav.presentation.ui.screen.MainScreen
-import com.example.sugtav.presentation.ui.theme.SugtavTheme
+import androidx.compose.ui.res.stringResource
+import com.example.sugtav.presentation.screen.MainScreen
+import com.example.sugtav.presentation.theme.SugtavTheme
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -24,26 +25,24 @@ class MainActivity : ComponentActivity() {
         setContent {
             SugtavTheme {
 
-                val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(
-                    rememberTopAppBarState()
-                )
 
+                val scrollState = rememberScrollState()
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
                         CenterAlignedTopAppBar(
                             title = {
-                                Text(text = "בדיקת תו נכה")
+                                Text(text = stringResource(R.string.check_for_tav))
                             },
-                            scrollBehavior = scrollBehavior,
                         )
                     }
                 ) { innerPadding ->
                     MainScreen(
                         modifier = Modifier
                             .padding(innerPadding)
-                            .fillMaxSize(),
-                        )
+                            .fillMaxSize()
+                            .verticalScroll(scrollState),
+                    )
                 }
             }
         }
