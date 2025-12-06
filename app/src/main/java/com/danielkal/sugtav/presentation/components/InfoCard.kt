@@ -1,5 +1,6 @@
 package com.danielkal.sugtav.presentation.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,8 +15,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.danielkal.sugtav.R
@@ -26,6 +29,15 @@ fun InfoCard(modifier: Modifier = Modifier) {
     Card(
         modifier = modifier,
     ) {
+
+        val uriHandler = LocalUriHandler.current
+        val playStoreUrl = "https://play.google.com/store/apps/details?id=com.danielkal.sugtav&reviewId=0"
+
+        val baseStyle = MaterialTheme.typography.labelMedium
+        val underlinedStyle = baseStyle.copy(
+            textDecoration = TextDecoration.Underline
+        )
+
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -62,6 +74,17 @@ fun InfoCard(modifier: Modifier = Modifier) {
             )
 
 
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+                    .clickable{
+                        uriHandler.openUri(playStoreUrl)
+                    },
+                textAlign = TextAlign.Center,
+                style = underlinedStyle,
+                text = stringResource(R.string.review_text),
+            )
         }
     }
 }
